@@ -286,7 +286,7 @@ body.theme-white {
 
 /* Hero Section on White (Artonaut Refined Architecture) */
 .homepage-artonaut .hero-section {
-  padding-top: 130px;
+  padding-top: 155px;
   min-height: auto;
 }
 
@@ -925,9 +925,14 @@ a {
   }
 }
 
+/* Page Main Top Clearance (Desktop) */
+.main-page-top {
+  padding-top: 155px;
+}
+
 /* Hero Section */
 .hero-section {
-  padding-top: 135px;
+  padding-top: 155px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
