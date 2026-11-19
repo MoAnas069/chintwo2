@@ -209,11 +209,15 @@ body.theme-white {
 }
 
 .homepage-artonaut .header-brand {
-  color: #111112;
+  color: #111112 !important;
+}
+
+.homepage-artonaut .header-brand span {
+  color: #111112 !important;
 }
 
 .homepage-artonaut .header-brand img {
-  filter: invert(1) contrast(200%);
+  filter: brightness(0) !important;
 }
 
 .homepage-artonaut .header-info-cluster .mono-tag {
@@ -335,7 +339,7 @@ body.theme-white {
 }
 
 .homepage-artonaut .rotating-seal-badge .seal-center-emblem {
-  filter: invert(1) contrast(200%);
+  filter: brightness(0) !important;
   width: 30px;
   height: 30px;
 }
@@ -519,8 +523,12 @@ body.theme-white {
   color: #ffffff !important;
 }
 
+.homepage-artonaut .site-footer .header-brand span {
+  color: #ffffff !important;
+}
+
 .homepage-artonaut .site-footer .header-brand img {
-  filter: none !important;
+  filter: brightness(0) invert(1) !important;
 }
 
 .homepage-artonaut .site-footer .body-regular {
@@ -767,6 +775,46 @@ a {
   font-weight: 700;
   letter-spacing: -0.06em;
   text-transform: uppercase;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.header-brand span {
+  display: inline-block;
+  color: inherit;
+}
+
+.header-brand img {
+  width: 22px;
+  height: 22px;
+  display: block;
+  flex-shrink: 0;
+  filter: brightness(0) invert(1);
+  transition: opacity var(--transition-fast);
+}
+
+.theme-bone .site-header .header-brand {
+  color: #1a1917 !important;
+}
+
+.theme-bone .site-header .header-brand span {
+  color: #1a1917 !important;
+}
+
+.theme-bone .site-header .header-brand img {
+  filter: brightness(0) !important;
+}
+
+.site-footer .header-brand {
+  color: #ffffff !important;
+}
+
+.site-footer .header-brand span {
+  color: #ffffff !important;
+}
+
+.site-footer .header-brand img {
+  filter: brightness(0) invert(1) !important;
 }
 
 .header-info-cluster {
@@ -1038,6 +1086,18 @@ a {
 }
 
 /* Works Section */
+.works-desktop-action {
+  display: inline-flex;
+}
+
+.works-mobile-action {
+  display: none;
+}
+
+.works-slider-indicators {
+  display: none;
+}
+
 .works-header {
   display: flex;
   justify-content: space-between;
@@ -1521,6 +1581,105 @@ a {
 
   .homepage-artonaut .hero-caption-overlay {
     padding: 0.85rem 1rem;
+  }
+
+  /* Mobile Horizontal Casual Slider for "Simply, the work." (#selected-works) */
+  .works-desktop-action {
+    display: none !important;
+  }
+
+  .works-mobile-action {
+    display: flex !important;
+    justify-content: center;
+    margin-top: 1.75rem;
+    width: 100%;
+  }
+
+  .works-mobile-action .btn-pill {
+    width: 100%;
+    max-width: 320px;
+    justify-content: center;
+  }
+
+  #selected-works .works-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    display: block;
+  }
+
+  #selected-works .works-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 1.15rem !important;
+    padding: 0.5rem 1rem 1.25rem 1rem !important;
+    margin-left: calc(-1 * var(--container-padding, 1.5rem)) !important;
+    margin-right: calc(-1 * var(--container-padding, 1.5rem)) !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+
+  #selected-works .works-grid::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  #selected-works .work-card {
+    flex: 0 0 82vw !important;
+    width: 82vw !important;
+    max-width: 330px !important;
+    min-width: 260px !important;
+    grid-column: auto !important;
+    scroll-snap-align: center;
+    scroll-snap-stop: normal;
+    margin-bottom: 0 !important;
+  }
+
+  #selected-works .work-card .work-thumb-frame {
+    aspect-ratio: 4 / 3 !important;
+    width: 100% !important;
+    margin-bottom: 0.85rem !important;
+  }
+
+  #selected-works .work-card:nth-child(3n + 1) {
+    grid-column: auto !important;
+  }
+
+  #selected-works .work-card:nth-child(3n + 1) .work-thumb-frame {
+    aspect-ratio: 4 / 3 !important;
+  }
+
+  #selected-works .work-card-title {
+    font-size: 1.15rem !important;
+  }
+
+  .works-slider-indicators {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .works-slider-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(17, 17, 18, 0.2);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .works-slider-dot.active {
+    width: 22px;
+    border-radius: 11px;
+    background: #111112;
   }
 
   /* Grids collapse to intentional single-column flow */

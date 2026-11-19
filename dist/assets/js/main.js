@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initWorksFilter();
   initContactForm();
   initScrollAnimations();
+  initMobileWorksSlider();
 });
 
 /* 1. Header Scroll Behavior */
@@ -230,5 +231,170 @@ function initScrollAnimations() {
 
   document.querySelectorAll('.reveal-on-scroll').forEach(el => {
     observer.observe(el);
+  });
+}
+
+/* 8. Mobile Casual Works Slider ("Simply, the work.") */
+function initMobileWorksSlider() {
+  const section = document.querySelector('#selected-works');
+  if (!section) return;
+
+  const track = section.querySelector('.works-grid');
+  const cards = section.querySelectorAll('.work-card');
+  const indicatorContainer = section.querySelector('.works-slider-indicators');
+  if (!track || !cards.length) return;
+
+  // Build dots for mobile carousel
+  if (indicatorContainer && !indicatorContainer.children.length) {
+    cards.forEach((_, idx) => {
+      const dot = document.createElement('button');
+      dot.className = `works-slider-dot ${idx === 0 ? 'active' : ''}`;
+      dot.setAttribute('aria-label', `Go to work ${idx + 1} of ${cards.length}`);
+      dot.addEventListener('click', () => {
+        scrollToCard(idx);
+        resetAutoSlide();
+      });
+      indicatorContainer.appendChild(dot);
+    });
+  }
+
+  const dots = indicatorContainer ? indicatorContainer.querySelectorAll('.works-slider-dot') : [];
+
+  function updateActiveDot(activeIndex) {
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle('active', idx === activeIndex);
+    });
+  }
+
+  function getActiveIndex() {
+    const scrollLeft = track.scrollLeft;
+    let closestIdx = 0;
+    let minDiff = Infinity;
+    cards.forEach((card, idx) => {
+      const diff = Math.abs(card.offsetLeft - track.offsetLeft - scrollLeft);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closestIdx = idx;
+      }
+    });
+    return closestIdx;
+  }
+
+  function scrollToCard(index) {
+    if (index < 0 || index >= cards.length) return;
+    const targetCard = cards[index];
+    const targetLeft = targetCard.offsetLeft - track.offsetLeft - (track.clientWidth - targetCard.clientWidth) / 2;
+    track.scrollTo({
+      left: Math.max(0, targetLeft),
+      behavior: 'smooth'
+    });
+    updateActiveDot(index);
+  }
+
+  // Update dots on scroll
+  let scrollTicking = false;
+  track.addEventListener('scroll', () => {
+    if (!scrollTicking) {
+      requestAnimationFrame(() => {
+        updateActiveDot(getActiveIndex());
+        scrollTicking = false;
+      });
+      scrollTicking = true;
+    }
+  }, { passive: true });
+
+  // Casual Auto-Slide: gently and casually advances slides when idle and in view
+  let autoSlideTimer = null;
+  let isInteracting = false;
+  let resumeTimer = null;
+
+  function stopAutoSlide() {
+    if (autoSlideTimer) {
+      clearInterval(autoSlideTimer);
+      autoSlideTimer = null;
+    }
+  }
+
+  function startAutoSlide() {
+    if (window.innerWidth > 768) return;
+    stopAutoSlide();
+    autoSlideTimer = setInterval(() => {
+      if (isInteracting) return;
+      const current = getActiveIndex();
+      const next = (current + 1) % cards.length;
+      scrollToCard(next);
+    }, 4000);
+  }
+
+  function resetAutoSlide() {
+    isInteracting = true;
+    stopAutoSlide();
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => {
+      isInteracting = false;
+      startAutoSlide();
+    }, 5000);
+  }
+
+  // Pause on user touch interaction
+  track.addEventListener('touchstart', () => {
+    isInteracting = true;
+    stopAutoSlide();
+  }, { passive: true });
+
+  track.addEventListener('touchend', () => {
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => {
+      isInteracting = false;
+      startAutoSlide();
+    }, 4500);
+  }, { passive: true });
+
+  // Avoid opening artwork modal on touch swipe gestures
+  let startX = 0;
+  let isDragging = false;
+  track.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    isDragging = false;
+  }, { passive: true });
+
+  track.addEventListener('touchmove', (e) => {
+    if (Math.abs(e.touches[0].clientX - startX) > 12) {
+      isDragging = true;
+    }
+  }, { passive: true });
+
+  cards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      if (isDragging) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        isDragging = false;
+      }
+    }, true);
+  });
+
+  // Observe visibility
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          startAutoSlide();
+        } else {
+          stopAutoSlide();
+        }
+      });
+    }, { threshold: 0.15 });
+    observer.observe(section);
+  } else {
+    startAutoSlide();
+  }
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth <= 768) {
+      startAutoSlide();
+    } else {
+      stopAutoSlide();
+    }
   });
 }
