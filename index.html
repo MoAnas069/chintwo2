@@ -139,20 +139,18 @@
         </div>
       </div>
 
-      <!-- Main Display Title & Rotating Stamp -->
-      <div class="with-corners hero-title-row"
-        style="padding: 2rem 0 1.5rem; display: flex; justify-content: space-between; align-items: flex-end;">
+      <!-- Main Display Title & Rotating Stamp (Oversized Editorial Typography) -->
+      <div class="with-corners hero-title-row">
         <span class="c-bracket c-tl"></span>
         <span class="c-bracket c-tr"></span>
 
         <div>
-          <p class="mono-tag" style="color: var(--accent-gold); margin-bottom: 0.5rem;">FINE ART &bull; MONOPRINTS
-            &bull; EDITIONS</p>
+          <p class="mono-tag" style="color: var(--accent-gold); margin-bottom: 0.75rem;">01 / CURATED SHOWCASE &bull; MONUMENTAL OIL &amp; SUMI ARCHIVE</p>
           <h1 class="display-title">CHINTWO</h1>
         </div>
 
         <!-- Rotating Circular Atelier Seal (Artonaut Ellipse 3) -->
-        <div class="rotating-seal-badge">
+        <div class="rotating-seal-badge" aria-hidden="true">
           <svg class="seal-svg-text" viewBox="0 0 100 100">
             <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none" />
             <text font-family="'Inter', sans-serif" font-size="7.5" font-weight="600" letter-spacing="1.8"
@@ -169,48 +167,52 @@
         <span class="c-bracket c-br"></span>
       </div>
 
-      <!-- Diptych Artwork Composition -->
-      <div class="hero-diptych-grid">
-        <div class="hero-image-wrapper with-corners">
+      <!-- Layered Artwork Composition (Artonaut Layered Depth & Spatial Hierarchy) -->
+      <div class="hero-layered-stage" id="hero-stage">
+        <!-- Layer 1: Primary Monumental Canvas (Plate I) -->
+        <div class="hero-image-wrapper hero-layer-primary with-corners" data-layer="primary">
           <span class="c-bracket c-tl"></span>
           <span class="c-bracket c-tr"></span>
           <span class="c-bracket c-bl"></span>
           <span class="c-bracket c-br"></span>
-          <img src="/assets/images/hero_landscape.webp" alt="The Silent Hour" loading="eager"
-            style="width: 100%; height: 100%; object-fit: cover;">
+          <img src="/assets/images/hero_landscape.webp" alt="The Silent Hour" loading="eager">
           <div class="hero-caption-overlay">
             <div>
               <p class="mono-tag">PLATE I &bull; OIL &amp; SLATE</p>
-              <p style="font-weight: 500; font-size: clamp(0.95rem, 2vw, 1.15rem);">The Silent Hour</p>
+              <p style="font-weight: 600; font-size: clamp(0.95rem, 2vw, 1.2rem); color: #111112;">The Silent Hour</p>
             </div>
-            <span class="mono-tag" style="color: var(--accent-gold);">180 &times; 240 CM</span>
+            <span class="mono-tag" style="color: var(--accent-gold); font-weight: 600;">180 &times; 240 CM</span>
           </div>
         </div>
 
-        <div class="hero-image-wrapper with-corners">
+        <!-- Layer 2: Overlapping Secondary Washi Study (Plate II) -->
+        <div class="hero-image-wrapper hero-layer-secondary with-corners" data-layer="secondary">
           <span class="c-bracket c-tl"></span>
           <span class="c-bracket c-tr"></span>
           <span class="c-bracket c-bl"></span>
           <span class="c-bracket c-br"></span>
-          <img src="/assets/images/hero_portrait.webp" alt="Atmospheric Solitude" loading="eager"
-            style="width: 100%; height: 100%; object-fit: cover;">
+          <img src="/assets/images/hero_portrait.webp" alt="Atmospheric Solitude" loading="eager">
           <div class="hero-caption-overlay">
             <div>
               <p class="mono-tag">PLATE II &bull; ECHIZEN KOZO</p>
-              <p style="font-weight: 500; font-size: clamp(0.95rem, 2vw, 1.15rem);">Atmospheric Solitude
-              </p>
+              <p style="font-weight: 600; font-size: clamp(0.95rem, 2vw, 1.2rem); color: #111112;">Atmospheric Solitude</p>
             </div>
-            <span class="mono-tag" style="color: var(--accent-gold);">STUDY ARCHIVE</span>
+            <span class="mono-tag" style="color: var(--accent-gold); font-weight: 600;">STUDY ARCHIVE</span>
           </div>
         </div>
       </div>
 
-      <!-- Hero Bottom Bar -->
+      <!-- Hero Bottom Bar: Artist Philosophy & Materiality -->
       <div class="hero-bottom-bar">
-        <p class="body-regular" style="max-width: 720px; color: var(--text-dark-secondary);">
+        <p class="body-regular">
           Working at the intersection of traditional East Asian sumi printmaking and atmospheric chiaroscuro. Each
           creation investigates negative space, tactile washi fibers, and the emotional resonance of solitude.
         </p>
+        <div class="hero-materials-tag">
+          <p class="mono-tag" style="color: rgba(17, 17, 18, 0.5); font-size: 0.72rem; letter-spacing: 0.08em;">
+            KOBAIEN SUMI &bull; ECHIZEN KOZO &bull; CRUSHED SLATE &bull; BELGIAN LINEN
+          </p>
+        </div>
       </div>
     </section>
 

@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initContactForm();
   initScrollAnimations();
   initMobileWorksSlider();
+  initHeroParallax();
 });
 
 /* 1. Header Scroll Behavior */
@@ -396,5 +397,35 @@ function initMobileWorksSlider() {
     } else {
       stopAutoSlide();
     }
+  });
+}
+
+/* 9. Hero Stage Subtle Layered Parallax */
+function initHeroParallax() {
+  const stage = document.querySelector('#hero-stage');
+  if (!stage) return;
+  const secondary = stage.querySelector('.hero-layer-secondary');
+  if (!secondary) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  let ticking = false;
+  stage.addEventListener('mousemove', (e) => {
+    if (window.innerWidth <= 900) return;
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const rect = stage.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        secondary.style.transform = `translate3d(${x * 14}px, calc(2.8rem + ${y * 10}px), 0)`;
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  stage.addEventListener('mouseleave', () => {
+    if (window.innerWidth <= 900) return;
+    secondary.style.transform = 'translate3d(0, 2.8rem, 0)';
   });
 }

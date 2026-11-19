@@ -9,7 +9,6 @@ export const CHINTWO_STUDIO = {
     tagline: "A Story in Ink, Atmosphere & Memory",
     statement: "Working between Kyoto washi craft and atmospheric chiaroscuro, Chintwo crafts evocative visual narratives investigating negative space, raw mineral pigments, and quiet moments of solitude.",
     philosophy: "Rooted in the Kyoto concept of Ma—the charged stillness between forms—each creation investigates negative space, tactile washi fibers, and the emotional resonance of solitude.",
-    heroScrollCue: "SCROLL TO EXPLORE",
     copyrightYear: "2026",
     socials: [
       { name: "Instagram", url: "https://www.instagram.com/chintwo.com", handle: "@chintwo.com" },
